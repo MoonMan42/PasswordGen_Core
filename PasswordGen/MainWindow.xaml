@@ -31,7 +31,7 @@
                 <MenuItem Header="Exit" Click="Exit_Program"/>
             </MenuItem>
             <MenuItem Header="Edit">
-                <MenuItem Header="Rules"/>
+                <MenuItem Header="Rules" Click="OpenRules_Click"/>
             </MenuItem>
         </Menu>
 
@@ -48,11 +48,10 @@
         <ListView x:Name="passwordListView" 
                   Grid.Row="3" Grid.Column="0"
                   Grid.RowSpan="3" Grid.ColumnSpan="3"
-                  Margin="5"
                   MouseDoubleClick="CopyEntry_DoubleClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Password" Width="Auto" DisplayMemberBinding="{Binding Password}"/>
+                    <GridViewColumn Header="Password" Width="370" DisplayMemberBinding="{Binding Password}"/>
                 </GridView>
             </ListView.View>
             

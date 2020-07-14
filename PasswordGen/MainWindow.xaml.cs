@@ -35,7 +35,7 @@ namespace PasswordGen
             foreach (var item in itemList)
             {
                 item.Password = item.Password.Replace("*", $"{random.Next(10, 100)}");
-                item.Password = item.Password.Replace("!", $"{specialCharList[random.Next(specialCharList.Length - 1)]}");
+                item.Password = item.Password.Replace("~", $"{specialCharList[random.Next(specialCharList.Length - 1)]}");
             }
 
             passwordListView.ItemsSource = itemList;
@@ -94,7 +94,10 @@ namespace PasswordGen
         {
             PasswordModel password = (PasswordModel)passwordListView.SelectedItem;
 
-            Clipboard.SetText(password.Password);
+            if (password != null)
+            {
+                Clipboard.SetText(password.Password);
+            }
         }
 
         private void Exit_Program(object sender, RoutedEventArgs e)
@@ -109,6 +112,13 @@ namespace PasswordGen
             deleteAllWindow.ShowDialog();
 
             LoadItemList();
+        }
+
+        private void OpenRules_Click(object sender, RoutedEventArgs e)
+        {
+            PasswordRules passwordRulesWindow = new PasswordRules();
+
+            passwordRulesWindow.ShowDialog();
         }
     }
 }

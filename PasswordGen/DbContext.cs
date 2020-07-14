@@ -38,7 +38,7 @@ namespace PasswordGen
                 }
             }
             // reload list
-            ReadDatabase();
+            //ReadDatabase();
         }
 
         public void DeleteEntry(PasswordModel passwordToDelete)
@@ -51,7 +51,7 @@ namespace PasswordGen
                 cnn.Delete(passwordToDelete);
             }
 
-            ReadDatabase();
+            //ReadDatabase();
         }
 
         public void DeleteAll() // deletes the entire database (BE CARFUL!!)

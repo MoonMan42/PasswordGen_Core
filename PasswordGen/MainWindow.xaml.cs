@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace PasswordGen
@@ -11,6 +12,9 @@ namespace PasswordGen
         private List<PasswordModel> passwords;
 
         private DbContext _context;
+
+        private string[] specialCharList = { "!", "$", "#", "%", "&" };
+
         public MainWindow()
         {
             InitializeComponent();
@@ -19,7 +23,22 @@ namespace PasswordGen
 
             _context = new DbContext();
 
-            passwordListView.ItemsSource = _context.ReadDatabase();
+            // load data list
+            LoadItemList();
+        }
+
+        private void LoadItemList()
+        {
+            var itemList = _context.ReadDatabase();
+            Random random = new Random();
+
+            foreach (var item in itemList)
+            {
+                item.Password = item.Password.Replace("*", $"{random.Next(10, 100)}");
+                item.Password = item.Password.Replace("!", $"{specialCharList[random.Next(specialCharList.Length - 1)]}");
+            }
+
+            passwordListView.ItemsSource = itemList;
         }
 
         private void SaveEntry_Click(object sender, RoutedEventArgs e)
@@ -31,6 +50,7 @@ namespace PasswordGen
 
             // save Entry
             _context.SaveEntry(newPassword);
+            LoadItemList();
 
             newEntryTextBox.Text = string.Empty;
         }
@@ -45,19 +65,21 @@ namespace PasswordGen
             if (e.Key == System.Windows.Input.Key.Return)
             {
                 _context.SaveEntry(newPassword);
+                LoadItemList();
                 newEntryTextBox.Text = string.Empty;
             }
         }
 
         private void RefreshList_Click(object sender, RoutedEventArgs e)
         {
-            _context.ReadDatabase();
+            LoadItemList();
         }
 
         private void DeleteEntry_Click(object sender, RoutedEventArgs e)
         {
             PasswordModel passwordToDelete = (PasswordModel)passwordListView.SelectedItem;
             _context.DeleteEntry(passwordToDelete);
+            LoadItemList();
 
         }
 
@@ -85,6 +107,8 @@ namespace PasswordGen
             DeleteAllCheck deleteAllWindow = new DeleteAllCheck();
 
             deleteAllWindow.ShowDialog();
+
+            LoadItemList();
         }
     }
 }

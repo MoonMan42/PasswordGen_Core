@@ -5,8 +5,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PasswordGen"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        ResizeMode="NoResize"
+        Background="LightGray"
+        Title="MainWindow" Height="300" Width="400">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+ 
+        <Menu  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="LightGray" >
+            <MenuItem Header="File">
+                <MenuItem Header="Refresh List" Click="RefreshList_Click"/>
+                <MenuItem Header="Delete All" Click="DeleteAllCheck_Click"/>
+                <MenuItem Header="Exit" Click="Exit_Program"/>
+            </MenuItem>
+        </Menu>
+
+        <TextBox x:Name="newEntryTextBox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="15"
+                 KeyDown="SaveEntry_KeyDown"/>
+
+        <Button Content="Save"  Grid.Row="1" Grid.Column="3" Margin="15"
+                Click="SaveEntry_Click"/>
+
+        <Button Content="Refresh" Grid.Row="2" Grid.Column="0" Margin="15" Click="RefreshList_Click"/>
+        <Button Content="Delete" Grid.Row="2" Grid.Column="1" Margin="15" Click="DeleteEntry_Click"/>
+        <Button Content="Copy" Grid.Row="2" Grid.Column="2" Margin="15" Click="CopyEntry_Click"/>
+
+        <ListView x:Name="passwordListView" 
+                  Grid.Row="3" Grid.Column="0"
+                  Grid.RowSpan="3" Grid.ColumnSpan="3"
+                  Margin="5"
+                  MouseDoubleClick="CopyEntry_DoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Password" Width="Auto" DisplayMemberBinding="{Binding Password}"/>
+                </GridView>
+            </ListView.View>
+            
+        </ListView>
 
     </Grid>
 </Window>

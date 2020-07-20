@@ -11,7 +11,7 @@ namespace PasswordGen
     {
         private List<PasswordModel> passwords;
 
-        private DbContext _context;
+        private PasswordDbContext _context;
 
         private string[] specialCharList = { "!", "$", "#", "%", "&" };
 
@@ -21,7 +21,7 @@ namespace PasswordGen
 
             passwords = new List<PasswordModel>();
 
-            _context = new DbContext();
+            _context = new PasswordDbContext();
 
             // load data list
             LoadItemList();

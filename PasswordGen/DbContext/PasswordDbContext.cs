@@ -4,11 +4,11 @@ using System.IO;
 
 namespace PasswordGen
 {
-    public class DbContext
+    public class PasswordDbContext
     {
         private List<PasswordModel> passwords;
 
-        public DbContext()
+        public PasswordDbContext()
         {
             passwords = new List<PasswordModel>();
         }
@@ -16,7 +16,7 @@ namespace PasswordGen
 
         public List<PasswordModel> ReadDatabase()
         {
-            using (SQLiteConnection cnn = new SQLiteConnection(App.databasePath))
+            using (SQLiteConnection cnn = new SQLiteConnection(App.passwordDbPath))
             {
                 cnn.CreateTable<PasswordModel>();
                 passwords = (cnn.Table<PasswordModel>()).ToList();
@@ -30,35 +30,33 @@ namespace PasswordGen
 
             if (newPassword.Password != null)
             {
-                using (SQLiteConnection cnn = new SQLiteConnection(App.databasePath))
+                using (SQLiteConnection cnn = new SQLiteConnection(App.passwordDbPath))
                 {
                     cnn.CreateTable<PasswordModel>();
 
                     cnn.Insert(newPassword);
                 }
             }
-            // reload list
-            //ReadDatabase();
+
         }
 
         public void DeleteEntry(PasswordModel passwordToDelete)
         {
 
-            using (SQLiteConnection cnn = new SQLiteConnection(App.databasePath))
+            using (SQLiteConnection cnn = new SQLiteConnection(App.passwordDbPath))
             {
                 cnn.CreateTable<PasswordModel>();
 
                 cnn.Delete(passwordToDelete);
             }
 
-            //ReadDatabase();
         }
 
         public void DeleteAll() // deletes the entire database (BE CARFUL!!)
         {
-            if (File.Exists(App.databasePath))
+            if (File.Exists(App.passwordDbPath))
             {
-                File.Delete(App.databasePath);
+                File.Delete(App.passwordDbPath);
             }
         }
 

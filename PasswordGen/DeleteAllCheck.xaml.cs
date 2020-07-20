@@ -7,13 +7,13 @@ namespace PasswordGen
     /// </summary>
     public partial class DeleteAllCheck : Window
     {
-        private DbContext _context;
+        private PasswordDbContext _context;
 
         public DeleteAllCheck()
         {
             InitializeComponent();
 
-            _context = new DbContext();
+            _context = new PasswordDbContext();
         }
 
         private void DeleteDatabase_Click(object sender, RoutedEventArgs e)

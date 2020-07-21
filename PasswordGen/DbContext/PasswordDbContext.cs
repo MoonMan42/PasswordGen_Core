@@ -59,6 +59,5 @@ namespace PasswordGen
                 File.Delete(App.passwordDbPath);
             }
         }
-
     }
 }

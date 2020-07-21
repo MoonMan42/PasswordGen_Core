@@ -9,7 +9,6 @@ namespace PasswordGen
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<PasswordModel> passwords;
 
         private PasswordDbContext _context;
 
@@ -18,8 +17,6 @@ namespace PasswordGen
         public MainWindow()
         {
             InitializeComponent();
-
-            passwords = new List<PasswordModel>();
 
             _context = new PasswordDbContext();
 
@@ -38,8 +35,29 @@ namespace PasswordGen
                 item.Password = item.Password.Replace("~", $"{specialCharList[random.Next(specialCharList.Length - 1)]}");
             }
 
-            passwordListView.ItemsSource = itemList;
+            passwordListView.ItemsSource = Shuffle(itemList);
         }
+
+        public List<PasswordModel> Shuffle(List<PasswordModel> list)
+        {
+            Random gen = new Random();
+
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = gen.Next(n + 1);
+                var value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+
+            return list;
+        }
+
+
+
+
 
         private void SaveEntry_Click(object sender, RoutedEventArgs e)
         {

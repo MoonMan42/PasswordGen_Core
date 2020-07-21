@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PasswordGen"
         mc:Ignorable="d"
         FontSize="20"
+        WindowStartupLocation="Manual"
         Title="DeleteAllCheck" Height="200" Width="300">
     <Grid>
         <Grid.ColumnDefinitions>

@@ -94,9 +94,15 @@ namespace PasswordGen
         {
             PasswordModel password = (PasswordModel)passwordListView.SelectedItem;
 
-            if (password != null)
+            try
             {
-                Clipboard.SetText(password.Password);
+                if (password != null)
+                {
+                    Clipboard.SetText(password.Password);
+                }
+            }
+            catch (Exception ex)
+            {
             }
         }
 

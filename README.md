@@ -11,12 +11,13 @@ Password Generator Program to assist in generating new passwords
         public static string passwordDbPath = System.IO.Path.Combine(folderPath, passwordDb);
         
 1. Setup the model of the database
-         public class PasswordModel
-        {
-            [PrimaryKey, AutoIncrement]
-            public int Id { get; set; } // primary key, Auto increment integer
-            public string Password { get; set; }
-        }
+
+               public class PasswordModel
+                {
+                [PrimaryKey, AutoIncrement]
+                public int Id { get; set; } // primary key, Auto increment integer
+                public string Password { get; set; }
+                }
         
 1. Setup the basic connections for the Sqlite data table
 

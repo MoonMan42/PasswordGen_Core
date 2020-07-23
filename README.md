@@ -20,50 +20,50 @@ Password Generator Program to assist in generating new passwords
         
 1. Setup the basic connections for the Sqlite data table
         public class PasswordDbContext
-    {
-        private List<PasswordModel> passwords;
+                    {
+                        private List<PasswordModel> passwords;
 
-        public PasswordDbContext()
-        {
-            passwords = new List<PasswordModel>();
-        }
+                        public PasswordDbContext()
+                        {
+                            passwords = new List<PasswordModel>();
+                        }
 
 
-        public List<PasswordModel> ReadDatabase()
-        {
-            using (SQLiteConnection cnn = new SQLiteConnection(App.passwordDbPath))
-            {
-                cnn.CreateTable<PasswordModel>();
-                passwords = (cnn.Table<PasswordModel>()).ToList();
-            }
+                        public List<PasswordModel> ReadDatabase()
+                        {
+                            using (SQLiteConnection cnn = new SQLiteConnection(App.passwordDbPath))
+                            {
+                                cnn.CreateTable<PasswordModel>();
+                                passwords = (cnn.Table<PasswordModel>()).ToList();
+                            }
 
-            return passwords;
-        }
+                            return passwords;
+                        }
 
-        public void SaveEntry(PasswordModel newPassword)
-        {
+                        public void SaveEntry(PasswordModel newPassword)
+                        {
 
-            if (newPassword.Password != null)
-            {
-                using (SQLiteConnection cnn = new SQLiteConnection(App.passwordDbPath))
-                {
-                    cnn.CreateTable<PasswordModel>();
+                            if (newPassword.Password != null)
+                            {
+                                using (SQLiteConnection cnn = new SQLiteConnection(App.passwordDbPath))
+                                {
+                                    cnn.CreateTable<PasswordModel>();
 
-                    cnn.Insert(newPassword);
-                }
-            }
+                                    cnn.Insert(newPassword);
+                                }
+                            }
 
-        }
+                        }
 
-        public void DeleteEntry(PasswordModel passwordToDelete)
-        {
+                        public void DeleteEntry(PasswordModel passwordToDelete)
+                        {
 
-            using (SQLiteConnection cnn = new SQLiteConnection(App.passwordDbPath))
-            {
-                cnn.CreateTable<PasswordModel>();
+                            using (SQLiteConnection cnn = new SQLiteConnection(App.passwordDbPath))
+                            {
+                                cnn.CreateTable<PasswordModel>();
 
-                cnn.Delete(passwordToDelete);
-            }
+                                cnn.Delete(passwordToDelete);
+                            }
 
-        }
-        }
+                        }
+               }

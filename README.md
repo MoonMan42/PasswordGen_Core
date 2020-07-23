@@ -19,7 +19,8 @@ Password Generator Program to assist in generating new passwords
         }
         
 1. Setup the basic connections for the Sqlite data table
-        public class PasswordDbContext
+
+                public class PasswordDbContext
                     {
                         private List<PasswordModel> passwords;
 

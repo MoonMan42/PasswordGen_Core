@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Linq;
 
 namespace PasswordGen
 {
@@ -35,7 +36,9 @@ namespace PasswordGen
                 item.Password = item.Password.Replace("~", $"{specialCharList[random.Next(specialCharList.Length - 1)]}");
             }
 
-            passwordListView.ItemsSource = Shuffle(itemList);
+
+            // shuffle list and take the first 5
+            passwordListView.ItemsSource = Shuffle(itemList).Take(5);
         }
 
         public List<PasswordModel> Shuffle(List<PasswordModel> list)
@@ -105,7 +108,7 @@ namespace PasswordGen
         {
             PasswordModel password = (PasswordModel)passwordListView.SelectedItem;
 
-            Clipboard.SetText(password.Password);
+            Clipboard.SetDataObject(password.Password);
         }
 
         private void CopyEntry_DoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -116,7 +119,7 @@ namespace PasswordGen
             {
                 if (password != null)
                 {
-                    Clipboard.SetText(password.Password);
+                    Clipboard.SetDataObject(password.Password);
                 }
             }
             catch (Exception ex)

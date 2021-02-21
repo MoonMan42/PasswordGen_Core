@@ -55,8 +55,7 @@
                 <GridView>
                     <GridViewColumn Header="Password" Width="370" DisplayMemberBinding="{Binding Password}"/>
                 </GridView>
-            </ListView.View>
-            
+            </ListView.View>            
         </ListView>
 
     </Grid>
